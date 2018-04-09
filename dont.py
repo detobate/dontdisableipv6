@@ -17,10 +17,16 @@ dont_urls = ('http://techgenix.com/dont-disable-ipv6/',
              'https://blogs.technet.microsoft.com/askpfeplat/2013/06/16/ipv6-for-the-windows-administrator-why-you-need-to-care-about-ipv6/',
              'https://blogs.technet.microsoft.com/jlosey/2011/02/02/why-you-should-leave-ipv6-alone/',
              'https://serverfault.com/questions/880537/disadvantage-of-disabling-ipv6',
-             'https://www.reddit.com/r/sysadmin/comments/2pewpo/disable_ipv6_and_lose_the_checkmark/')
+             'https://www.reddit.com/r/sysadmin/comments/2pewpo/disable_ipv6_and_lose_the_checkmark/'
+             )
 
-reply_msg = 'Please don\'t disable IPv6, it will break things. #DontDisableIPv6'
+replies = ('Please don\'t disable IPv6, it will break things.',
+           'You shouldn\'t really disable IPv6, it\'s the future of the internet.',
+           'It\'s probably not IPv6\'s fault.',
+           'Disabling IPv6 might fix your current problem, but it will cause you more issues in the future.'
+           )
 
+hashtag = '#DontDisableIPv6'
 our_twitter_id = 983281983513088000
 debug = True
 
@@ -59,7 +65,7 @@ def ignore_tweet(tweet, ignore_words):
 
 def reply(tweet, twitter):
 
-    msg = '%s\n%s' % (reply_msg, random.choice(dont_urls))
+    msg = '%s %s\n%s' % (random.choice(replies), hashtag, random.choice(dont_urls))
     if debug:
         print('Replying to tweet_id: %i with "%s"' % (tweet['id'], msg))
 
