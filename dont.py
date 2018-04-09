@@ -7,7 +7,7 @@ import time
 import random
 
 
-key_words = ('disable IPv6', 'disabling IPv6', 'turn off IPv6')
+key_words = ('disable IPv6', 'disabling IPv6', 'turn off IPv6', 'turning off IPv6')
 ignore_words = ('don\'t', 'dont', 'shouldn\'t')
 dont_urls = ('http://techgenix.com/dont-disable-ipv6/',
              'https://biztechmagazine.com/article/2012/03/should-you-disable-ipv6-windows-7-pc',
@@ -64,8 +64,6 @@ def reply(tweet, twitter):
         print('Replying to tweet_id: %i with "%s"' % (tweet['id'], msg))
 
     twitter.update_status(status=msg, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
-
-
 
 
 
