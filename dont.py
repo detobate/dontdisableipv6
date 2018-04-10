@@ -103,7 +103,7 @@ def main():
                 if tweet['user']['id'] not in replied_to:
                     replied_to.insert(0, (tweet['user']['id']))
                     reply(tweet, twitter)
-                    if len(replied_to) > 10:
+                    if len(replied_to) > 5:
                         popped = replied_to.pop()
 
                 elif debug:
