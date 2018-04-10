@@ -87,7 +87,7 @@ def main():
             time.sleep(1)
         else:
             tweet = q.get()
-            if tweet['user']['id'] != str(our_twitter_id) and ignore_tweet(tweet['text'], ignore_words) is False:
+            if tweet['user']['id'] != our_twitter_id and ignore_tweet(tweet['text'], ignore_words) is False:
                 if debug:
                     print('Offending tweet: "%s"' % tweet['text'])
                     print('Tweet ID: %i from user: @%s with user ID: %i' % (tweet['id'], tweet['user']['screen_name'], tweet['user']['id']))
