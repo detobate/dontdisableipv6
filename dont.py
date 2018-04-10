@@ -69,7 +69,13 @@ def reply(tweet, twitter):
     if debug:
         print('Replying to tweet_id: %i with "%s"' % (tweet['id'], msg))
 
-    twitter.update_status(status=msg, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
+    try:
+        twitter.update_status(status=msg, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
+
+    except twython.exceptions.TwythonError:
+        if debug:
+            print('Failed to reply to tweet_id: %i' % tweet['id'])
+        pass
 
 
 def main():
@@ -82,6 +88,8 @@ def main():
 
     twitter = Twython(APP_KEY, APP_SECRET, ACCESS_KEY, ACCESS_SECRET)
 
+    replied_to = []
+
     while True:
         if q.empty():
             time.sleep(1)
@@ -92,7 +100,14 @@ def main():
                     print('Offending tweet: "%s"' % tweet['text'])
                     print('Tweet ID: %i from user: @%s with user ID: %i' % (tweet['id'], tweet['user']['screen_name'], tweet['user']['id']))
 
-                reply(tweet, twitter)
+                if tweet['user']['id'] not in replied_to:
+                    replied_to.insert(0, (tweet['user']['id']))
+                    reply(tweet, twitter)
+                    if len(replied_to) > 10:
+                        popped = replied_to.pop()
+
+                elif debug:
+                    print('We\'ve already replied to @%s recently. Ignoring' % tweet['user']['screen_name'])
 
             elif debug:
                 print('Ignoring tweet: "%s"' % tweet['text'])
