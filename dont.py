@@ -8,7 +8,7 @@ import random
 
 
 key_words = ('disable IPv6', 'disabling IPv6', 'turn off IPv6', 'turning off IPv6')
-ignore_words = ('don\'t', 'dont', 'shouldn\'t', '#DontDisableIPv6', 'stop')
+ignore_words = ('#DontDisableIPv6', 'don\'t', 'dont', 'do not', 'shouldn\'t', 'should not', 'stop')
 dont_urls = ('http://techgenix.com/dont-disable-ipv6/',
              'https://biztechmagazine.com/article/2012/03/should-you-disable-ipv6-windows-7-pc',
              'https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows',
@@ -29,6 +29,7 @@ replies = ('Please don\'t disable IPv6, it will break things.',
 hashtag = '#DontDisableIPv6'
 our_twitter_id = 983281983513088000
 debug = True
+dry_run = False
 
 
 class MyStreamer(TwythonStreamer):
@@ -56,8 +57,8 @@ def start_twitter_thread():
 def ignore_tweet(tweet, ignore_words):
     """ Checks Tweet for words that we want to ignore """
     ignore = False
-    for word in tweet.split(' '):
-        if word.lower() in [x.lower() for x in ignore_words]:
+    for word in ignore_words:
+        if word.lower() in tweet:
             ignore = True
 
     return(ignore)
@@ -70,7 +71,8 @@ def reply(tweet, twitter):
         print('Replying to tweet_id: %i with "%s"' % (tweet['id'], msg))
 
     try:
-        twitter.update_status(status=msg, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
+        if not dry_run:
+            twitter.update_status(status=msg, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
 
     except twython.exceptions.TwythonError:
         if debug:
