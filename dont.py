@@ -44,8 +44,10 @@ class MyStreamer(TwythonStreamer):
 
 
 def start_twitter():
-    stream = MyStreamer(APP_KEY, APP_SECRET, ACCESS_KEY, ACCESS_SECRET)
-    stream.statuses.filter(track=','.join(key_words))
+    while True:
+        stream = MyStreamer(APP_KEY, APP_SECRET, ACCESS_KEY, ACCESS_SECRET)
+        stream.statuses.filter(track=','.join(key_words))
+
 
 def start_twitter_thread():
     t = threading.Thread(target=start_twitter)
