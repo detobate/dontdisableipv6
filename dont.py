@@ -28,7 +28,7 @@ replies = ('Please don\'t disable IPv6, it will break things.',
 
 hashtag = '#DontDisableIPv6'
 our_twitter_id = 983281983513088000
-debug = True
+debug = False
 dry_run = False
 
 
@@ -103,8 +103,9 @@ def main():
             if (tweet['user']['id'] != our_twitter_id and ignore_tweet(tweet['text'], ignore_words) is False and
                 'retweeted_status' not in tweet):
 
+                print('Offending tweet: "%s"' % tweet['text'])
+
                 if debug:
-                    print('Offending tweet: "%s"' % tweet['text'])
                     print('Tweet ID: %i from user: @%s with user ID: %i' % (tweet['id'], tweet['user']['screen_name'], tweet['user']['id']))
 
                 if tweet['user']['id'] not in replied_to:
