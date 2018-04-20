@@ -8,7 +8,7 @@ import random
 
 
 key_words = ('disable IPv6', 'disabling IPv6', 'turn off IPv6', 'turning off IPv6')
-ignore_words = ('#DontDisableIPv6', 'don\'t', 'dont', 'do not', 'shouldn\'t', 'should not', 'stop')
+ignore_words = ('#dontdisableipv6', 'don\'t', 'dont', 'do not', 'shouldn\'t', 'should not', 'stop')
 dont_urls = ('http://techgenix.com/dont-disable-ipv6/',
              'https://biztechmagazine.com/article/2012/03/should-you-disable-ipv6-windows-7-pc',
              'https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows',
@@ -59,8 +59,8 @@ def start_twitter_thread():
 def ignore_tweet(tweet, ignore_words):
     """ Checks Tweet for words that we want to ignore """
     ignore = False
-    for word in ignore_words:
-        if word.lower() in tweet:
+    for word in tweet:
+        if word.lower() in ignore_words:
             ignore = True
 
     return(ignore)
