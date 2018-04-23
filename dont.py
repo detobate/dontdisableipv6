@@ -64,6 +64,7 @@ def start_twitter():
     while True:
         stream = MyStreamer(APP_KEY, APP_SECRET, ACCESS_KEY, ACCESS_SECRET)
         stream.statuses.filter(track=','.join(key_words))
+        time.sleep(30)  # If the connection gets dropped and/or ratelimited, don't hammer the API
 
 
 def start_twitter_thread():
