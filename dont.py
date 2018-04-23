@@ -9,22 +9,32 @@ import random
 
 key_words = ('disable IPv6', 'disabling IPv6', 'turn off IPv6', 'turning off IPv6')
 ignore_words = ('#dontdisableipv6', 'don\'t', 'dont', 'do not', 'shouldn\'t', 'should not', 'stop')
-dont_urls = ('http://techgenix.com/dont-disable-ipv6/',
-             'https://biztechmagazine.com/article/2012/03/should-you-disable-ipv6-windows-7-pc',
-             'https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows',
-             'https://blogs.technet.microsoft.com/netro/2010/11/24/arguments-against-disabling-ipv6/',
-             'https://blogs.technet.microsoft.com/ipv6/2007/11/08/disabling-ipv6-doesnt-help/',
-             'https://blogs.technet.microsoft.com/askpfeplat/2013/06/16/ipv6-for-the-windows-administrator-why-you-need-to-care-about-ipv6/',
-             'https://blogs.technet.microsoft.com/jlosey/2011/02/02/why-you-should-leave-ipv6-alone/',
-             'https://serverfault.com/questions/880537/disadvantage-of-disabling-ipv6',
-             'https://www.reddit.com/r/sysadmin/comments/2pewpo/disable_ipv6_and_lose_the_checkmark/'
-             )
+dont_urls = {
+            'xbox': ['http://xbox.com/ipv6'],
+            'windows': [
+                'http://techgenix.com/dont-disable-ipv6/',
+                 'https://biztechmagazine.com/article/2012/03/should-you-disable-ipv6-windows-7-pc',
+                 'https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows',
+                 'https://blogs.technet.microsoft.com/netro/2010/11/24/arguments-against-disabling-ipv6/',
+                 'https://blogs.technet.microsoft.com/ipv6/2007/11/08/disabling-ipv6-doesnt-help/',
+                 'https://blogs.technet.microsoft.com/askpfeplat/2013/06/16/ipv6-for-the-windows-administrator-why-you-need-to-care-about-ipv6/',
+                 'https://blogs.technet.microsoft.com/jlosey/2011/02/02/why-you-should-leave-ipv6-alone/',
+                 'https://www.reddit.com/r/sysadmin/comments/2pewpo/disable_ipv6_and_lose_the_checkmark/'
+                ],
+            'generic': ['https://serverfault.com/questions/880537/disadvantage-of-disabling-ipv6']
+             }
 
-replies = ('Please don\'t disable IPv6, it will break things.',
-           'You shouldn\'t really disable IPv6, it\'s the future of the internet.',
-           'It\'s probably not IPv6\'s fault.',
-           'Disabling IPv6 might fix your current problem, but it will cause you more issues in the future.'
-           )
+replies = {
+            'windows': ['Windows relies on #IPv6 internally, disabling it will cause issues'],
+            'fifa': ['@EA\'s Fifa is notoriously bad at supporting #IPv6 but @XboxSupport still recommends leaving it enabled'],
+            'xbox': ['Some Xbox games are poorly written and misbehave on IPv6, but @XboxSupport still recommends leaving it enabled'],
+            'generic': [
+                'Please don\'t disable IPv6, it will break things.',
+                'You shouldn\'t really disable IPv6, it\'s the future of the internet.',
+                'It\'s probably not IPv6\'s fault.',
+                'Disabling IPv6 might fix your current problem, but it will cause you more issues in the future.'
+                ]
+            }
 
 hashtag = '#DontDisableIPv6'
 our_twitter_id = 983281983513088000
@@ -69,13 +79,31 @@ def ignore_tweet(tweet, ignore_words):
 
 def reply(tweet, twitter):
 
-    msg = '%s %s\n%s' % (random.choice(replies), hashtag, random.choice(dont_urls))
+    # Try to find a relevant url and msg based on key words
+    url = None
+    for word in tweet['text'].split():
+        if word.lower() in dont_urls.keys() and word != 'generic':
+            url = random.choice(dont_urls[word.lower()])
+            break
+    if url is None:
+        url = random.choice(dont_urls['generic'])
+
+    msg = None
+    for word in tweet['text'].split():
+        if word.lower() in replies.keys() and word != 'generic':
+            msg = random.choice(replies[word.lower()])
+            break
+    if msg is None:
+        msg = random.choice(replies['generic'])
+
+    reply_tweet = '%s %s\n%s' % (msg, hashtag, url)
+
     if debug:
-        print('Replying to tweet_id: %i with "%s"' % (tweet['id'], msg))
+        print('Replying to tweet_id: %i with "%s"' % (tweet['id'], reply_tweet))
 
     try:
         if not dry_run:
-            twitter.update_status(status=msg, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
+            twitter.update_status(status=reply_tweet, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
 
     except twython.exceptions.TwythonError:
         if debug:
@@ -102,12 +130,16 @@ def main():
             tweet = q.get()
 
             if 'retweeted_status' in tweet:
-                if debug:
+                if debug and debug_high:
+                    print('Ignoring Retweet: %s' % tweet)
+                elif debug:
                     print('Ignoring Retweet: %s' % tweet['text'])
                 pass
 
-            elif 'is_quote_status' in tweet:
-                if debug:
+            elif tweet['is_quote_status'] is 'False':
+                if debug and debug_high:
+                    print('Ignoring Quoted Tweet: %s' % tweet)
+                elif debug:
                     print('Ignoring Quoted Tweet: %s' % tweet['text'])
                 pass
 
