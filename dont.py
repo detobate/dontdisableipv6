@@ -13,21 +13,27 @@ dont_urls = {
             'xbox': ['http://xbox.com/ipv6'],
             'windows': [
                 'http://techgenix.com/dont-disable-ipv6/',
-                 'https://biztechmagazine.com/article/2012/03/should-you-disable-ipv6-windows-7-pc',
-                 'https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows',
-                 'https://blogs.technet.microsoft.com/netro/2010/11/24/arguments-against-disabling-ipv6/',
-                 'https://blogs.technet.microsoft.com/ipv6/2007/11/08/disabling-ipv6-doesnt-help/',
-                 'https://blogs.technet.microsoft.com/askpfeplat/2013/06/16/ipv6-for-the-windows-administrator-why-you-need-to-care-about-ipv6/',
-                 'https://blogs.technet.microsoft.com/jlosey/2011/02/02/why-you-should-leave-ipv6-alone/',
-                 'https://www.reddit.com/r/sysadmin/comments/2pewpo/disable_ipv6_and_lose_the_checkmark/'
+                'https://biztechmagazine.com/article/2012/03/should-you-disable-ipv6-windows-7-pc',
+                'https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows',
+                'https://blogs.technet.microsoft.com/netro/2010/11/24/arguments-against-disabling-ipv6/',
+                'https://blogs.technet.microsoft.com/ipv6/2007/11/08/disabling-ipv6-doesnt-help/',
+                'https://blogs.technet.microsoft.com/askpfeplat/2013/06/16/ipv6-for-the-windows-administrator-why-you-need-to-care-about-ipv6/',
+                'https://blogs.technet.microsoft.com/jlosey/2011/02/02/why-you-should-leave-ipv6-alone/',
+                'https://www.reddit.com/r/sysadmin/comments/2pewpo/disable_ipv6_and_lose_the_checkmark/',
+                'https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-8.1-and-8/hh831730(v=ws.11)#EBE'
                 ],
-            'generic': ['https://serverfault.com/questions/880537/disadvantage-of-disabling-ipv6']
+            'generic': [
+                'https://serverfault.com/questions/880537/disadvantage-of-disabling-ipv6',
+                'https://blogs.cisco.com/enterprise/disable-ipv6',
+                'https://superuser.com/questions/1229910/disable-or-enable-ipv6-in-router'
+                ]
              }
 
 replies = {
             'windows': ['Windows relies on #IPv6 internally, disabling it will cause issues'],
             'fifa': ['@EA\'s Fifa is notoriously bad at supporting #IPv6 but @XboxSupport still recommends leaving it enabled'],
             'xbox': ['Some Xbox games are poorly written and misbehave on IPv6, but @XboxSupport still recommends leaving it enabled'],
+            'faster': ['https://www.howtogeek.com/195062/no-disabling-ipv6-probably-wont-speed-up-your-internet-connection/'],
             'generic': [
                 'Please don\'t disable IPv6, it will break things.',
                 'You shouldn\'t really disable IPv6, it\'s the future of the internet.',
