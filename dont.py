@@ -121,7 +121,7 @@ def main():
 
     twitter = Twython(APP_KEY, APP_SECRET, ACCESS_KEY, ACCESS_SECRET)
 
-    replied_to = []
+    replied_to = []     # List to keep track of who we've replied to recently
 
     while True:
         if q.empty():
@@ -129,13 +129,14 @@ def main():
         else:
             tweet = q.get()
 
+            # Don't test if True, as it's not always present
             if 'retweeted_status' in tweet:
                 if debug and debug_high:
                     print('Ignoring Retweet: %s' % tweet)
                 elif debug:
                     print('Ignoring Retweet: %s' % tweet['text'])
                 pass
-
+            # is_quote_status is always present
             elif tweet['is_quote_status'] is 'False':
                 if debug and debug_high:
                     print('Ignoring Quoted Tweet: %s' % tweet)
@@ -152,6 +153,7 @@ def main():
                 elif debug:
                     print('Tweet ID: %i from user: @%s with user ID: %i' % (tweet['id'], tweet['user']['screen_name'], tweet['user']['id']))
 
+                # Update the list of who we've replied to
                 if tweet['user']['id'] not in replied_to:
                     replied_to.insert(0, (tweet['user']['id']))
                     reply(tweet, twitter)
