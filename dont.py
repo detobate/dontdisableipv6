@@ -153,12 +153,10 @@ def main():
 
             elif tweet['user']['id'] != our_twitter_id and ignore_tweet(tweet['text'], ignore_words) is False:
 
-                print('Offending tweet: "%s"' % tweet['text'])
+                print('Offending tweet from %s: "%s"' % (tweet['user']['screen_name'], tweet['text']))
 
                 if debug and debug_high:
                     print(tweet)
-                elif debug:
-                    print('Tweet ID: %i from user: @%s with user ID: %i' % (tweet['id'], tweet['user']['screen_name'], tweet['user']['id']))
 
                 # Update the list of who we've replied to
                 if tweet['user']['id'] not in replied_to:
@@ -172,6 +170,10 @@ def main():
 
             elif debug:
                 print('Ignoring tweet: "%s"' % tweet['text'])
+                if debug_high:
+                    for key in tweet:
+                        print('%s : %s' % (key, tweet[key]))
+
             time.sleep(1)
 
 
