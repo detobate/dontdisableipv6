@@ -22,6 +22,7 @@ dont_urls = {
                 'https://www.reddit.com/r/sysadmin/comments/2pewpo/disable_ipv6_and_lose_the_checkmark/',
                 'https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-8.1-and-8/hh831730(v=ws.11)#EBE'
                 ],
+            'faster': ['https://www.howtogeek.com/195062/no-disabling-ipv6-probably-wont-speed-up-your-internet-connection/'],
             'generic': [
                 'https://serverfault.com/questions/880537/disadvantage-of-disabling-ipv6',
                 'https://blogs.cisco.com/enterprise/disable-ipv6',
@@ -33,7 +34,6 @@ replies = {
             'windows': ['Windows relies on #IPv6 internally, disabling it will cause issues'],
             'fifa': ['@EA\'s Fifa is notoriously bad at supporting #IPv6 but @XboxSupport still recommends leaving it enabled'],
             'xbox': ['Some Xbox games are poorly written and misbehave on IPv6, but @XboxSupport still recommends leaving it enabled'],
-            'faster': ['https://www.howtogeek.com/195062/no-disabling-ipv6-probably-wont-speed-up-your-internet-connection/'],
             'generic': [
                 'Please don\'t disable IPv6, it will break things.',
                 'You shouldn\'t really disable IPv6, it\'s the future of the internet.',
