@@ -7,6 +7,13 @@ import time
 import random
 
 
+hashtag = '#DontDisableIPv6'
+our_twitter_id = 983281983513088000
+debug = False
+debug_high = False
+dry_run = False
+
+
 key_words = ('disable IPv6', 'disabling IPv6', 'turn off IPv6', 'turning off IPv6')
 ignore_words = ('#dontdisableipv6', 'don\'t', 'dont', 'do not', 'shouldn\'t', 'should not', 'stop')
 dont_urls = {
@@ -45,12 +52,6 @@ replies = {
                 'Disabling IPv6 might fix your current problem, but it will cause you more issues in the future.'
                 ]
             }
-
-hashtag = '#DontDisableIPv6'
-our_twitter_id = 983281983513088000
-debug = False
-debug_high = False
-dry_run = False
 
 
 class MyStreamer(TwythonStreamer):
