@@ -69,7 +69,7 @@ def start_twitter():
     while True:
         stream = MyStreamer(APP_KEY, APP_SECRET, ACCESS_KEY, ACCESS_SECRET)
         stream.statuses.filter(track=','.join(key_words))
-        time.sleep(30)  # If the connection gets dropped and/or ratelimited, don't hammer the API
+        time.sleep(30)  # If the connection drops and/or ratelimited, don't hammer the API
 
 
 def start_twitter_thread():
@@ -117,7 +117,7 @@ def reply(tweet, twitter):
         if not dry_run:
             twitter.update_status(status=reply_tweet, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
 
-    except twython.exceptions.TwythonError:
+    except twitter.exceptions.TwythonError:
         if debug:
             print('Failed to reply to tweet_id: %i' % tweet['id'])
         pass
