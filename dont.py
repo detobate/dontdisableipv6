@@ -14,8 +14,8 @@ debug_high = False
 dry_run = False
 
 
-key_words = ('disable IPv6', 'disabling IPv6', 'turn off IPv6', 'turning off IPv6')
-ignore_words = ('#dontdisableipv6', 'don\'t', 'dont', 'do not', 'shouldn\'t', 'should not', 'stop')
+key_words = ('disable IPv6', 'disabling IPv6', 'turn off IPv6', 'turning off IPv6', 'turn IPv6 off')
+ignore_words = ('#dontdisableipv6', 'don\'t', 'dont', 'do not', 'shouldn\'t', 'should not', 'stop', 'turn ipv4 off')
 dont_urls = {
             'xbox': ['http://xbox.com/ipv6'],
             'windows': [
