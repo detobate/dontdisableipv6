@@ -118,7 +118,7 @@ def reply(tweet, twitter):
         if not dry_run:
             twitter.update_status(status=reply_tweet, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
 
-    except twitter.exceptions.TwythonError:
+    except twitter.TwythonError:
         if debug:
             print('Failed to reply to tweet_id: %i' % tweet['id'])
         pass
