@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from twython import Twython, TwythonStreamer
+from twython import Twython, TwythonStreamer, TwythonError
 from twitter_keys import *
 import queue
 import threading
@@ -118,7 +118,7 @@ def reply(tweet, twitter):
         if not dry_run:
             twitter.update_status(status=reply_tweet, in_reply_to_status_id=tweet['id'], auto_populate_reply_metadata='true')
 
-    except twitter.TwythonError:
+    except TwythonError:
         if debug:
             print('Failed to reply to tweet_id: %i' % tweet['id'])
         pass
