@@ -33,6 +33,7 @@ dont_urls = {
             'faster': ['https://www.howtogeek.com/195062/no-disabling-ipv6-probably-wont-speed-up-your-internet-connection/'],
             'security': ['https://www.nanog.org/sites/default/files/ebersman2_notr-boston-ipv6-sec.pdf'],
             'secure': ['https://www.nanog.org/sites/default/files/ebersman2_notr-boston-ipv6-sec.pdf'],
+            'vmware': ['https://www.runecast.biz/blog/ipv6-disabled-causes-esxi-65-to-fail-with-psod.jsp'],
             'generic': [
                 'https://serverfault.com/questions/880537/disadvantage-of-disabling-ipv6',
                 'https://blogs.cisco.com/enterprise/disable-ipv6',
@@ -46,6 +47,7 @@ replies = {
             'xbox': ['Some Xbox games are poorly written and misbehave on IPv6, but @XboxSupport still recommends leaving it enabled'],
             'security': ['Instead of ignoring #IPv6, learn about it, embrace it, and secure your network'],
             'secure': ['Instead of ignoring #IPv6, learn about it, embrace it, and secure your network'],
+            'vmware': ['VMWare ESXi doesn\'t like it when you disable IPv6'],
             'generic': [
                 'Please don\'t disable IPv6, it will break things.',
                 'You shouldn\'t really disable IPv6, it\'s the future of the internet.',
