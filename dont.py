@@ -66,6 +66,8 @@ class MyStreamer(TwythonStreamer):
 
     def on_error(self, status_code, data):
         print('Twitter error %s - %s' % (status_code, data))
+        if status_code == '420' or status_code == '500':
+            time.sleep(10)
 
 
 def start_twitter():
