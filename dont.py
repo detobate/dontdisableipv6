@@ -155,12 +155,12 @@ def main():
                     print('Ignoring Retweet: %s' % tweet['text'])
                 pass
             # is_quote_status is always present
-            elif tweet['is_quote_status'] is 'False':
+            elif tweet['is_quote_status'] is 'True':
                 if debug and debug_high:
                     print('Ignoring Quoted Tweet: %s' % tweet)
                 elif debug:
                     print('Ignoring Quoted Tweet: %s' % tweet['text'])
-                pass
+                continue
 
             elif tweet['user']['id'] != our_twitter_id and ignore_tweet(tweet['text'], ignore_words) is False:
 
