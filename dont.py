@@ -9,7 +9,7 @@ import random
 
 hashtag = '#DontDisableIPv6'
 our_twitter_id = 983281983513088000
-debug = False
+debug = True
 debug_high = False
 dry_run = False
 
@@ -87,9 +87,11 @@ def start_twitter_thread():
 def ignore_tweet(tweet, ignore_words):
     """ Checks Tweet for words that we want to ignore """
     ignore = False
-    for word in tweet:
-        if word.lower() in ignore_words:
+    for word in ignore_words:
+        if word in ''.join([x.lower() for x in tweet]):
             ignore = True
+            if debug_high:
+                print('Found ignore word: %s' % word)
 
     return(ignore)
 
@@ -162,7 +164,12 @@ def main():
                     print('Ignoring Quoted Tweet: %s' % tweet['text'])
                 continue
 
-            elif tweet['user']['id'] != our_twitter_id and ignore_tweet(tweet['text'], ignore_words) is False:
+            elif ignore_tweet(tweet['text'], ignore_words):
+                if debug:
+                    print('Ignoring tweet %s because it contains ignore words' % tweet['text'])
+                continue
+
+            elif tweet['user']['id'] != our_twitter_id:
 
                 print('Offending tweet from %s: "%s"' % (tweet['user']['screen_name'], tweet['text']))
 
