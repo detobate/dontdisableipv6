@@ -72,8 +72,12 @@ class MyStreamer(TwythonStreamer):
 
 def start_twitter():
     while True:
-        stream = MyStreamer(APP_KEY, APP_SECRET, ACCESS_KEY, ACCESS_SECRET)
-        stream.statuses.filter(track=','.join(key_words))
+        try:
+            stream = MyStreamer(APP_KEY, APP_SECRET, ACCESS_KEY, ACCESS_SECRET)
+            stream.statuses.filter(track=','.join(key_words))
+        except:
+            print('Twitter stream crashed. Restarting')
+
         time.sleep(30)  # If the connection drops and/or ratelimited, don't hammer the API
 
 
