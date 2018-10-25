@@ -158,19 +158,19 @@ def main():
                 if debug and debug_high:
                     print('Ignoring Retweet: %s' % tweet)
                 elif debug:
-                    print('Ignoring Retweet: %s' % tweet['text'])
+                    print('Ignoring Retweet: "%s"' % tweet['text'])
                 pass
             # is_quote_status is always present
             elif tweet['is_quote_status'] is 'True':
                 if debug and debug_high:
                     print('Ignoring Quoted Tweet: %s' % tweet)
                 elif debug:
-                    print('Ignoring Quoted Tweet: %s' % tweet['text'])
+                    print('Ignoring Quoted Tweet: "%s"' % tweet['text'])
                 continue
 
             elif ignore_tweet(tweet['text'], ignore_words):
                 if debug:
-                    print('Ignoring tweet %s because it contains ignore words' % tweet['text'])
+                    print('Ignoring tweet "%s" because it contains ignore words' % tweet['text'])
                 continue
 
             elif tweet['user']['id'] != our_twitter_id:
@@ -191,10 +191,11 @@ def main():
                     print('We\'ve already replied to @%s recently. Ignoring' % tweet['user']['screen_name'])
 
             elif debug:
-                print('Ignoring tweet: "%s"' % tweet['text'])
-                if debug_high:
-                    for key in tweet:
-                        print('%s : %s' % (key, tweet[key]))
+                print('Ignoring our own tweet: "%s"' % tweet['text'])
+
+            if debug_high:
+                for key in tweet:
+                    print('%s : %s' % (key, tweet[key]))
 
             time.sleep(1)
 
