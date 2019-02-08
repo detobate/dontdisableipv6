@@ -28,7 +28,8 @@ dont_urls = {
                 'https://blogs.technet.microsoft.com/askpfeplat/2013/06/16/ipv6-for-the-windows-administrator-why-you-need-to-care-about-ipv6/',
                 'https://blogs.technet.microsoft.com/jlosey/2011/02/02/why-you-should-leave-ipv6-alone/',
                 'https://www.reddit.com/r/sysadmin/comments/2pewpo/disable_ipv6_and_lose_the_checkmark/',
-                'https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-8.1-and-8/hh831730(v=ws.11)#EBE'
+                'https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-8.1-and-8/hh831730(v=ws.11)#EBE',
+                'https://blogs.technet.microsoft.com/yongrhee/2018/02/28/stop-hurting-yourself-by-disabling-ipv6-why-do-you-really-do-it-2/'
                 ],
             'faster': ['https://www.howtogeek.com/195062/no-disabling-ipv6-probably-wont-speed-up-your-internet-connection/'],
             'security': ['https://www.nanog.org/sites/default/files/ebersman2_notr-boston-ipv6-sec.pdf'],
