@@ -22,7 +22,7 @@ dont_urls = {
             'windows': [
                 'http://techgenix.com/dont-disable-ipv6/',
                 'https://biztechmagazine.com/article/2012/03/should-you-disable-ipv6-windows-7-pc',
-                'https://support.microsoft.com/en-us/help/929852/how-to-disable-ipv6-or-its-components-in-windows',
+                'https://support.microsoft.com/en-us/help/929852/guidance-for-configuring-ipv6-in-windows-for-advanced-users',
                 'https://blogs.technet.microsoft.com/netro/2010/11/24/arguments-against-disabling-ipv6/',
                 'https://blogs.technet.microsoft.com/ipv6/2007/11/08/disabling-ipv6-doesnt-help/',
                 'https://blogs.technet.microsoft.com/askpfeplat/2013/06/16/ipv6-for-the-windows-administrator-why-you-need-to-care-about-ipv6/',
