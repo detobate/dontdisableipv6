@@ -37,7 +37,6 @@ dont_urls = {
             'vmware': ['https://www.runecast.biz/blog/ipv6-disabled-causes-esxi-65-to-fail-with-psod.jsp'],
             'generic': [
                 'https://serverfault.com/questions/880537/disadvantage-of-disabling-ipv6',
-                'https://blogs.cisco.com/enterprise/disable-ipv6',
                 'https://superuser.com/questions/1229910/disable-or-enable-ipv6-in-router'
                 ]
              }
@@ -174,7 +173,7 @@ def main():
                     print('Ignoring tweet "%s" because it contains ignore words' % tweet['text'])
                 continue
 
-            elif tweet['user']['id'] != our_twitter_id:
+            elif int(tweet['user']['id']) != our_twitter_id:
 
                 print('Offending tweet from %s: "%s"' % (tweet['user']['screen_name'], tweet['text']))
 
