@@ -161,7 +161,7 @@ def main():
                     print('Ignoring Retweet: "%s"' % tweet['text'])
                 pass
             # is_quote_status is always present
-            elif tweet['is_quote_status'] is 'True':
+            elif tweet['is_quote_status'] == 'True':
                 if debug and debug_high:
                     print('Ignoring Quoted Tweet: %s' % tweet)
                 elif debug:
