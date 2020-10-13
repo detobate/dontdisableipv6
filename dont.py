@@ -20,6 +20,7 @@ ignore_words = ('#dontdisableipv6', 'don\'t', 'dont', 'do not', 'shouldn\'t', 's
 dont_urls = {
             'xbox': ['http://xbox.com/ipv6'],
             'windows': [
+                'https://twitter.com/SwiftOnSecurity/status/1316089203747434504',
                 'http://techgenix.com/dont-disable-ipv6/',
                 'https://biztechmagazine.com/article/2012/03/should-you-disable-ipv6-windows-7-pc',
                 'https://support.microsoft.com/en-us/help/929852/guidance-for-configuring-ipv6-in-windows-for-advanced-users',
