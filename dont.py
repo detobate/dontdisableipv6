@@ -122,8 +122,10 @@ def reply(tweet, twitter):
 
     reply_tweet = '%s %s\n%s' % (msg, hashtag, url)
 
-    if debug:
+    if debug and debug_high:
         print('Replying to tweet_id: %i with "%s"' % (tweet['id'], reply_tweet))
+    elif debug:
+        print('Replying to tweet_id: %i' % (tweet['id']))
 
     try:
         if not dry_run:
@@ -154,13 +156,21 @@ def main():
         else:
             tweet = q.get()
 
+            if int(tweet['user']['id']) == our_twitter_id:
+                if debug and debug_high:
+                    print('Ignoring our own tweet: "%s"' % tweet['text'])
+                continue
+
+            # Skip retweets, there tends to be a few spambots RTing crappy blogs/articles
             # Don't test if True, as it's not always present
-            if 'retweeted_status' in tweet:
+            elif 'retweeted_status' in tweet:
                 if debug and debug_high:
                     print('Ignoring Retweet: %s' % tweet)
                 elif debug:
                     print('Ignoring Retweet: "%s"' % tweet['text'])
-                pass
+                continue
+
+            # Same for quotes
             # is_quote_status is always present
             elif tweet['is_quote_status'] == 'True':
                 if debug and debug_high:
@@ -174,7 +184,7 @@ def main():
                     print('Ignoring tweet "%s" because it contains ignore words' % tweet['text'])
                 continue
 
-            elif int(tweet['user']['id']) != our_twitter_id:
+            else:
 
                 print('Offending tweet from %s: "%s"' % (tweet['user']['screen_name'], tweet['text']))
 
@@ -190,9 +200,6 @@ def main():
 
                 elif debug:
                     print('We\'ve already replied to @%s recently. Ignoring' % tweet['user']['screen_name'])
-
-            elif debug:
-                print('Ignoring our own tweet: "%s"' % tweet['text'])
 
             if debug_high:
                 for key in tweet:
